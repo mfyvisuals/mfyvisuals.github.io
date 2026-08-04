@@ -76,3 +76,29 @@ body{
 .floating-whatsapp svg{width:26px;height:26px;flex:0 0 auto}
 .floating-whatsapp:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 24px 58px rgba(0,0,0,.38),0 0 0 9px rgba(37,211,102,.1)}
 @media(max-width:640px){.floating-whatsapp{right:14px;bottom:14px;width:56px;height:56px;min-height:56px;padding:0;justify-content:center}.floating-whatsapp span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
+
+
+/* Mobile stability fix — project pages */
+html,
+body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+  overscroll-behavior-x:none;
+}
+@supports (overflow:clip){
+  html,
+  body{overflow-x:clip}
+}
+body{touch-action:pan-y pinch-zoom}
+.project-page,
+.project-wrap,
+.project-top,
+.project-hero,
+.video-shell,
+.video-box,
+.project-footer{
+  min-width:0;
+  max-width:100%;
+}
+.floating-whatsapp{max-width:calc(100vw - 28px)}

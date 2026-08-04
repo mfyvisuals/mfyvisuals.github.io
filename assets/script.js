@@ -159,7 +159,9 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
 
   let current = 0;
   let touchStartX = 0;
+  let touchStartY = 0;
   let touchDeltaX = 0;
+  let touchDeltaY = 0;
   let didSwipe = false;
 
   const dots = slides.map((_, index) => {
@@ -194,13 +196,20 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
 
   viewport.addEventListener('touchstart', event => {
     touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
     touchDeltaX = 0;
+    touchDeltaY = 0;
     didSwipe = false;
   }, { passive: true });
   viewport.addEventListener('touchmove', event => {
     touchDeltaX = event.touches[0].clientX - touchStartX;
-    if (Math.abs(touchDeltaX) > 12) didSwipe = true;
-  }, { passive: true });
+    touchDeltaY = event.touches[0].clientY - touchStartY;
+    const horizontalGesture = Math.abs(touchDeltaX) > Math.abs(touchDeltaY) && Math.abs(touchDeltaX) > 8;
+    if (horizontalGesture) {
+      event.preventDefault();
+      didSwipe = true;
+    }
+  }, { passive: false });
   viewport.addEventListener('touchend', () => {
     if (Math.abs(touchDeltaX) > 45) goTo(current + (touchDeltaX < 0 ? 1 : -1));
     window.setTimeout(() => { didSwipe = false; }, 80);

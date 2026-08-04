@@ -570,3 +570,74 @@ body:before{
   .floating-whatsapp{right:14px;bottom:14px;width:56px;height:56px;min-height:56px;padding:0;justify-content:center}
   .floating-whatsapp span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 }
+
+
+/* Mobile stability fix — prevent sideways page drift */
+html,
+body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+  overscroll-behavior-x:none;
+}
+@supports (overflow:clip){
+  html,
+  body{overflow-x:clip}
+}
+body{touch-action:pan-y pinch-zoom}
+main,
+.site-header,
+.section-shell,
+.hero,
+.services,
+.projects,
+.photography,
+.about,
+.order-panel,
+.contact,
+.site-footer{
+  max-width:100%;
+  min-width:0;
+}
+.projects,
+.about,
+.order-panel{overflow-x:clip}
+.hero>* ,
+.project-grid>* ,
+.service-grid>* ,
+.about-layout>* ,
+.order-shell>* ,
+.form-grid>* ,
+.service-intro>* ,
+.channel-feature>* ,
+.photo-project,
+.photo-carousel,
+.photo-carousel-viewport,
+.photo-carousel-track,
+.photo-slide{
+  min-width:0;
+  max-width:100%;
+}
+.photo-carousel-viewport{
+  touch-action:pan-y pinch-zoom;
+  overscroll-behavior-inline:contain;
+}
+.floating-whatsapp{max-width:calc(100vw - 28px)}
+.form-grid input,
+.form-grid select,
+.form-grid textarea{min-width:0}
+@media(max-width:640px){
+  .section-shell{
+    width:calc(100% - 28px);
+    max-width:var(--max);
+  }
+  body{background-attachment:scroll}
+  .site-header{width:100%;max-width:100%}
+  .section-heading h2,
+  .hero h1,
+  .about h2,
+  .contact h2{
+    max-width:100%;
+    overflow-wrap:anywhere;
+  }
+}
