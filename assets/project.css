@@ -1,0 +1,78 @@
+:root{--bg:#0a0a0a;--text:#f3f3f3;--muted:#979797;--line:#262626;--accent:#ff4d00}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}.project-page{min-height:100vh;padding:26px}.project-wrap{width:min(1260px,100%);margin:auto}.project-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:90px}.back{font-size:14px;color:#d0d0d0;border:1px solid #303030;border-radius:999px;padding:11px 16px}.brand{font-family:Manrope,sans-serif;font-weight:800}.project-hero{padding:40px 0 70px}.project-hero h1{font-family:Manrope,sans-serif;font-size:clamp(50px,8.5vw,124px);letter-spacing:-.06em;line-height:.92;margin:0;max-width:1180px}.video-shell{display:flex;justify-content:center}.video-box{width:100%;aspect-ratio:16/9;border-radius:28px;border:1px solid var(--line);background:#111;overflow:hidden;box-shadow:0 32px 100px rgba(0,0,0,.42)}.video-box.vertical{width:min(500px,100%);aspect-ratio:9/16}.video-box iframe{display:block;width:100%;height:100%;border:0}.project-footer{display:flex;justify-content:space-between;color:#6f6f6f;font-size:13px;padding:35px 0}@media(max-width:640px){.project-page{padding:16px}.project-top{margin-bottom:55px}.project-hero{padding:20px 0 45px}.project-hero h1{font-size:48px}.video-box{border-radius:18px}.project-footer{flex-direction:column;gap:8px}}
+
+/* Custom video posters */
+.video-box{position:relative}
+.project-video-poster{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:#111;cursor:pointer;overflow:hidden}
+.project-video-poster img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .35s ease}
+.project-video-poster:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.32),rgba(0,0,0,.03) 62%)}
+.project-video-poster:hover img{transform:scale(1.025);filter:saturate(1.06)}
+.project-play-button{position:absolute;left:50%;top:50%;z-index:2;transform:translate(-50%,-50%);width:76px;height:76px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.95);color:#111;font-size:23px;padding-left:5px;box-shadow:0 16px 48px rgba(0,0,0,.42);transition:transform .25s ease}
+.project-video-poster:hover .project-play-button{transform:translate(-50%,-50%) scale(1.06)}
+@media(max-width:640px){.project-play-button{width:62px;height:62px;font-size:19px}}
+
+/* Personal photo brand mark */
+.project-top .brand{width:44px;height:44px;border-radius:50%;overflow:hidden;border:1px solid #343434;background:#181818}
+.project-top .brand img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 38%}
+
+/* 2026 color refresh */
+:root{--bg:#0b1220;--text:#f7f8ff;--muted:#aeb8ca;--line:rgba(154,181,225,.2);--accent:#ff7657;--accent-2:#8b7cff;--accent-3:#28d7c0}
+body{
+  background:
+    radial-gradient(circle at 9% 6%,rgba(55,112,255,.23),transparent 30rem),
+    radial-gradient(circle at 91% 12%,rgba(215,76,255,.16),transparent 28rem),
+    linear-gradient(135deg,#09101d 0%,#0f1b31 52%,#171326 100%);
+  background-attachment:fixed;
+}
+.project-page{position:relative}
+.project-page:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.7),transparent 78%);
+}
+.back{color:#dce5f4;border-color:rgba(154,181,225,.25);background:rgba(17,31,52,.62)}
+.back:hover{border-color:rgba(40,215,192,.62);background:rgba(22,42,67,.82)}
+.project-hero h1{
+  color:transparent;
+  background:linear-gradient(105deg,#fff 0%,#dfe9ff 52%,#8fe8dc 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+}
+.video-box{
+  background:#101a2c;
+  border-color:rgba(147,178,226,.24);
+  box-shadow:0 38px 110px rgba(0,4,18,.55),0 0 72px rgba(105,85,255,.09);
+}
+.project-video-poster{background:#101a2c}
+.project-play-button{background:linear-gradient(135deg,#fff,#dcfff9);color:#122038;box-shadow:0 18px 52px rgba(0,7,24,.48)}
+.project-footer{color:#91a0b7}
+.project-top .brand{border-color:rgba(154,181,225,.28);background:#142139}
+
+/* Fixed WhatsApp contact */
+.floating-whatsapp{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:950;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:56px;
+  padding:0 19px 0 15px;
+  border:1px solid rgba(222,255,235,.28);
+  border-radius:999px;
+  background:linear-gradient(135deg,#25d366,#16a94e);
+  color:#fff;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:700;
+  box-shadow:0 18px 48px rgba(0,0,0,.32),0 0 0 7px rgba(37,211,102,.08);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.floating-whatsapp svg{width:26px;height:26px;flex:0 0 auto}
+.floating-whatsapp:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 24px 58px rgba(0,0,0,.38),0 0 0 9px rgba(37,211,102,.1)}
+@media(max-width:640px){.floating-whatsapp{right:14px;bottom:14px;width:56px;height:56px;min-height:56px;padding:0;justify-content:center}.floating-whatsapp span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}

@@ -1,0 +1,28 @@
+MEHMET FARUK YILMAZ PORTFOLYO — YAYINA ALMA REHBERİ
+
+ÖNERİLEN KOLAY YÖNTEM: NETLIFY
+
+1. Netlify hesabı oluşturun.
+2. Dashboard içinden yeni bir proje/site oluşturun.
+3. Bu paketteki “mfy_portfolio_site” klasörünü sürükleyip bırakın.
+4. Netlify size geçici bir “siteadi.netlify.app” adresi verir.
+5. Site açıldıktan sonra tüm videoları, fotoğrafları, WhatsApp ve form bağlantılarını test edin.
+
+ALAN ADI BAĞLAMA
+
+1. Uygun bir alan adı satın alın. Önerilen ilk seçenek: mehmetfarukyilmaz.com
+2. Netlify panelinde Domain Management / Production Domains bölümüne gidin.
+3. Satın aldığınız alan adını ekleyin.
+4. Netlify’nin gösterdiği DNS kayıtlarını alan adını aldığınız firmanın DNS paneline girin.
+5. www sürümünü de ekleyip ana adrese yönlendirin.
+6. DNS yayılımı tamamlandığında SSL/HTTPS sertifikasını kontrol edin.
+
+GÜNCELLEME YAPMA
+
+Site dosyaları değiştiğinde güncel “mfy_portfolio_site” klasörünü Netlify’de Deploys alanına tekrar sürükleyip bırakın. Yeni sürüm aynı alan adına yayınlanır.
+
+ÖNEMLİ
+
+- Klasör yapısını ve assets/projects dizinlerini değiştirmeyin.
+- Alan adı netleştiğinde index.html içindeki sosyal paylaşım görseli adresi mutlak alan adıyla güncellenmelidir.
+- Proje talep paneli şu anda WhatsApp/e-posta mesajı oluşturur; ödeme almaz ve sunucuda sipariş kaydetmez.
