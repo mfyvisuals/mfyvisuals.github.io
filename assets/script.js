@@ -44,6 +44,48 @@ document.querySelectorAll('.video-poster-frame[data-video-id]').forEach(frame =>
 });
 
 
+// Play portfolio videos directly on the homepage instead of opening project pages.
+document.querySelectorAll('.project-card[data-video-id]').forEach(card => {
+  const playVideo = () => {
+    const art = card.querySelector('.project-art');
+    if (!art || art.classList.contains('is-playing')) return;
+
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube-nocookie.com/embed/${card.dataset.videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+    iframe.title = card.dataset.videoTitle || 'Portfolyo videosu';
+    iframe.loading = 'eager';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.allowFullscreen = true;
+
+    art.classList.add('is-playing');
+    card.classList.add('is-playing');
+    card.setAttribute('aria-label', `${iframe.title} oynatılıyor`);
+    art.appendChild(iframe);
+  };
+
+  card.addEventListener('click', playVideo);
+  card.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      playVideo();
+    }
+  });
+});
+
+// Service cards scroll to the most relevant portfolio example.
+document.querySelectorAll('[data-service-link]').forEach(link => {
+  link.addEventListener('click', event => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    target.classList.add('service-focus');
+    window.setTimeout(() => target.classList.remove('service-focus'), 1800);
+  });
+});
+
+
 // Photography lightbox
 const lightbox = document.createElement('div');
 lightbox.className = 'lightbox';
@@ -97,7 +139,7 @@ if (orderForm) {
   const createMessage = () => {
     const services = selectedServices();
     return [
-      'Merhaba Mehmet Faruk, portfolyo siteniz üzerinden bir proje talebi oluşturuyorum.',
+      'Merhaba Mehmet Faruk Bey, video ve fotoğraf prodüksiyon hizmetleriniz hakkında bilgi almak istiyorum. Portfolyo siteniz üzerinden proje detaylarımı iletiyorum.',
       '',
       `Ad Soyad: ${valueOf('customerName') || '-'}`,
       `Marka / İşletme: ${valueOf('company') || '-'}`,
