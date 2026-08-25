@@ -24,11 +24,32 @@ const observer = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+// Keep only one inline YouTube player active at a time.
+// Starting another video removes the previous iframe so its playback stops immediately.
+const stopOtherInlineVideos = activeContainer => {
+  document.querySelectorAll('.video-poster-frame.is-playing').forEach(frame => {
+    if (frame === activeContainer) return;
+    frame.querySelector('iframe')?.remove();
+    frame.classList.remove('is-playing');
+  });
+
+  document.querySelectorAll('.project-card.is-playing').forEach(card => {
+    const art = card.querySelector('.project-art');
+    if (art === activeContainer) return;
+    art?.querySelector('iframe')?.remove();
+    art?.classList.remove('is-playing');
+    card.classList.remove('is-playing');
+    const title = card.dataset.videoTitle || 'Portfolyo videosu';
+    card.setAttribute('aria-label', `${title} videosunu oynat`);
+  });
+};
+
 // Load the featured YouTube video only after the custom cover is clicked.
 document.querySelectorAll('.video-poster-frame[data-video-id]').forEach(frame => {
   const playButton = frame.querySelector('.hero-play-button');
   const playVideo = () => {
     if (frame.classList.contains('is-playing')) return;
+    stopOtherInlineVideos(frame);
     const videoId = frame.dataset.videoId;
     const title = frame.dataset.videoTitle || 'YouTube videosu';
     const iframe = document.createElement('iframe');
@@ -43,12 +64,13 @@ document.querySelectorAll('.video-poster-frame[data-video-id]').forEach(frame =>
   playButton?.addEventListener('click', playVideo);
 });
 
-
 // Play portfolio videos directly on the homepage instead of opening project pages.
 document.querySelectorAll('.project-card[data-video-id]').forEach(card => {
   const playVideo = () => {
     const art = card.querySelector('.project-art');
     if (!art || art.classList.contains('is-playing')) return;
+
+    stopOtherInlineVideos(art);
 
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.youtube-nocookie.com/embed/${card.dataset.videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
