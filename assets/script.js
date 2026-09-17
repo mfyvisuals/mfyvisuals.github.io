@@ -292,3 +292,102 @@ document.querySelectorAll('[data-carousel]').forEach(carousel => {
 
   update();
 });
+
+// Scroll progress, cursor waves and responsive card depth.
+(() => {
+  const header = document.querySelector('.site-header');
+  if (header) {
+    const progress = document.createElement('span');
+    progress.className = 'scroll-progress';
+    progress.setAttribute('aria-hidden', 'true');
+    header.appendChild(progress);
+
+    let ticking = false;
+    const updateProgress = () => {
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      progress.style.width = `${Math.min(100, Math.max(0, window.scrollY / maxScroll * 100))}%`;
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(updateProgress);
+    }, { passive: true });
+    updateProgress();
+  }
+
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!finePointer || reducedMotion) return;
+
+  const aura = document.createElement('div');
+  aura.className = 'cursor-aura';
+  aura.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(aura);
+
+  let targetX = -400;
+  let targetY = -400;
+  let currentX = targetX;
+  let currentY = targetY;
+  let previousRippleX = targetX;
+  let previousRippleY = targetY;
+  let previousRippleTime = 0;
+
+  const animateAura = () => {
+    currentX += (targetX - currentX) * .16;
+    currentY += (targetY - currentY) * .16;
+    aura.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    window.requestAnimationFrame(animateAura);
+  };
+  animateAura();
+
+  const createRipple = (x, y) => {
+    const ripple = document.createElement('span');
+    ripple.className = 'cursor-ripple';
+    ripple.setAttribute('aria-hidden', 'true');
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+    document.body.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove(), { once: true });
+  };
+
+  window.addEventListener('pointermove', event => {
+    targetX = event.clientX;
+    targetY = event.clientY;
+    aura.classList.add('is-visible');
+    const now = performance.now();
+    const distance = Math.hypot(event.clientX - previousRippleX, event.clientY - previousRippleY);
+    if (now - previousRippleTime > 85 && distance > 20) {
+      createRipple(event.clientX, event.clientY);
+      previousRippleX = event.clientX;
+      previousRippleY = event.clientY;
+      previousRippleTime = now;
+    }
+  }, { passive: true });
+
+  document.documentElement.addEventListener('mouseleave', () => aura.classList.remove('is-visible'));
+  document.documentElement.addEventListener('mouseenter', () => aura.classList.add('is-visible'));
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    const art = card.querySelector('.project-art');
+    if (!art) return;
+    card.addEventListener('pointermove', event => {
+      if (card.classList.contains('is-playing')) return;
+      const rect = art.getBoundingClientRect();
+      const x = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+      const y = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
+      art.style.setProperty('--glow-x', `${x * 100}%`);
+      art.style.setProperty('--glow-y', `${y * 100}%`);
+      art.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 4.5}deg) rotateY(${(x - 0.5) * 5.5}deg) translateY(-4px)`;
+    });
+    card.addEventListener('pointerleave', () => { art.style.transform = ''; });
+  });
+
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('pointermove', event => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--card-x', `${event.clientX - rect.left}px`);
+      card.style.setProperty('--card-y', `${event.clientY - rect.top}px`);
+    });
+  });
+})();

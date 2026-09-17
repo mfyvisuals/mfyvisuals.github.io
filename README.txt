@@ -1,7 +1,7 @@
 MEHMET FARUK YILMAZ — PORTFOLYO SİTESİ
 
 Bu sürümde:
-- 13 video projesi ve kapakları
+- 9 video projesi ve özel kapakları
 - Motor1 Türkiye kurgu portfolyosu
 - Nişan ve otomotiv fotoğraf galerileri (10 fotoğraf)
 - Hakkımda bölümünde 4 kişisel/backstage fotoğraf
@@ -23,10 +23,3 @@ Instagram: @pontia.mp4
 - Yayına alma adımları için YAYINA_ALMA_REHBERI.txt
 
 Yeni proje: Doktor Engin Aytur — Reels Videosu (YouTube Shorts: Z8OerCgKwGM)
-
-
-25.08.2026 GÜNCELLEMESİ:
-- Akyıldız Orkestra (YouTube Shorts: 9QBeemG-d0Y)
-- DH Wrapping Audi RS3 (YouTube Shorts: QeyU9w3fMEU)
-- Konya Sofrası Google Maps (YouTube Shorts: Erd9kKvGinE)
-- Ana sayfada aynı anda yalnızca tek video oynar; yeni video açıldığında önceki otomatik olarak durur.
