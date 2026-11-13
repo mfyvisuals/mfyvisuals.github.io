@@ -1,0 +1,14 @@
+MEHMET FARUK YILMAZ — SİNEMATİK SİTE
+
+index.html dosyasını açarak siteyi inceleyebilirsin.
+
+Güncelleme: Sinematik tasarım ana sayfaya uygulandı. Beş yeni video,
+1600 × 900 düzenlenmiş kapaklar ve toplam 20 proje yer alıyor.
+Fotoğraflar, hakkımda ve proje talep formu korundu. Mobil menü eklendi.
+
+GitHub Pages için: Bu klasörün İÇİNDEKİ dosya ve klasörleri mevcut
+sitenin köküne yükle. index.html ve assets aynı düzeyde olmalı.
+CNAME dosyanı koru. Video oynatma internet bağlantısı gerektirir.
+
+Mehmet Faruk Yılmaz
+mehmetfarukyilmaz.com

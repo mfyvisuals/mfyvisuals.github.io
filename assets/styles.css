@@ -951,3 +951,6 @@ body:before{
   .ticker-track,.hero:before{animation:none}
   .project-art{transform:none!important}
 }
+
+/* Portfolio cover ratio, November 2026 */
+.project-art{aspect-ratio:16/9}
